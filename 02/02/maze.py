@@ -41,6 +41,24 @@ class Maze:
             output += ''.join([c.value for c in row]) + '\n'
         return output
 
+    def goal_test(self, ml: MazeLocation) -> bool:
+        return ml == self.goal
+
+    def successors(self, ml: MazeLocation) -> List[MazeLocation]:
+        locations: List[MazeLocation] = []
+        if ml.row - 1 >= 0:
+            locations.append(MazeLocation(ml.row - 1, ml.column))
+        if ml.row + 1 < self.row:
+            locations.append(MazeLocation(ml.row + 1, ml.column))
+        if ml.column - 1 >= 0:
+            locations.append(MazeLocation(ml.row, ml.column - 1))
+        if ml.column + 1 < self.column:
+            locations.append(MazeLocation(ml.row, ml.column + 1))
+        return [
+            l for l in locations
+            if self.grid[l.row][l.column] != Cell.BLOCKED
+        ]
+
 
 if __name__ == '__main__':
     maze = Maze()
