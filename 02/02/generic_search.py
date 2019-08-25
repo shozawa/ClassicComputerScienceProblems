@@ -22,9 +22,9 @@ class Stack(Generic[T]):
 
 
 class Node(Generic[T]):
-    def __init__(self, state: T, parent: Optional(Node)):
+    def __init__(self, state: T, parent: Optional[Node[T]]):
         self.state: T = state
-        self.parent: Node[T] = parent
+        self.parent: Optional[Node[T]] = parent
 
 
 def dfs(initial: T,
